@@ -1,0 +1,32 @@
+# A modern, beautified version of "White on Black"
+# Created for a cleaner aesthetic and reduced eye strain.
+
+title Monochrome
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0  230 230 230  0 0  # regular   foreground color (Off-White)
+color  1   25  25  25  1 0  # regular   background color (Near Black)
+
+color  2   45  45  45  0 0  # regular   color 0 Black
+color  3  230  60  60  0 0  # regular   color 1 Red
+color  4   60 200  60  0 0  # regular   color 2 Green
+color  5  230 210  80  0 0  # regular   color 3 Yellow
+color  6   60 140 220  0 0  # regular   color 4 Blue
+color  7  230  70 200  0 0  # regular   color 5 Magenta
+color  8   60 200 210  0 0  # regular   color 6 Cyan
+color  9  200 200 200  0 0  # regular   color 7 White
+
+# intensive colors
+color 10  255 255 255  0 1  # intensive foreground color
+color 11   25  25  25  1 0  # intensive background color
+
+color 12  110 110 110  0 0  # intensive color 0
+color 13  255 100 100  0 0  # intensive color 1
+color 14  100 255 100  0 0  # intensive color 2
+color 15  255 255 100  0 0  # intensive color 3
+color 16  100 180 255  0 0  # intensive color 4
+color 17  255 110 255  0 0  # intensive color 5
+color 18  100 240 255  0 0  # intensive color 6
+color 19  255 255 255  0 0  # intensive color 7

@@ -1,0 +1,31 @@
+# A modern, beautified version of "Breeze"
+
+title Breeze
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0  239 240 241  0 0  # regular   foreground color
+color  1   49  54  59  1 0  # regular   background color
+
+color  2    7  54  66  0 0  # regular   color 0 Black
+color  3  237  21  21  0 0  # regular   color 1 Red
+color  4   17 209  22  0 0  # regular   color 2 Green
+color  5  246 116   0  0 0  # regular   color 3 Yellow
+color  6   29 153 243  0 0  # regular   color 4 Blue
+color  7  155  89 182  0 0  # regular   color 5 Magenta
+color  8   26 188 156  0 0  # regular   color 6 Cyan
+color  9  239 240 241  0 0  # regular   color 7 White
+
+# intensive colors
+color 10  252 252 252  0 1  # intensive foreground color
+color 11   35  38  41  1 0  # intensive background color
+
+color 12  255  85   0  0 0  # intensive color 0
+color 13  192  57  43  0 0  # intensive color 1
+color 14   28 220 154  0 0  # intensive color 2
+color 15  253 188  75  0 0  # intensive color 3
+color 16   61 174 233  0 0  # intensive color 4
+color 17  142  68 173  0 0  # intensive color 5
+color 18   22 160 133  0 0  # intensive color 6
+color 19  252 252 252  0 0  # intensive color 7

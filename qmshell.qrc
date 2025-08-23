@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/SettingsWindow.qml</file>
+        <file>qml/TerminalView.qml</file>
+        <file>README.md</file>
+        <file>data/color_schemes/Parchment.schema</file>
+        <file>data/color_schemes/Paperwhite.schema</file>
+        <file>data/color_schemes/Monochrome.schema</file>
+        <file>data/color_schemes/Ivory.schema</file>
+        <file>data/color_schemes/Breeze.schema</file>
+        <file>data/color_schemes/DarkPastels.schema</file>
+        <file>data/color_schemes/Deepin.schema</file>
+        <file>data/color_schemes/Matrixgreen.schema</file>
+        <file>data/color_schemes/Slate.schema</file>
+        <file>data/color_schemes/Cleanslate.schema</file>
+        <file>data/color_schemes/Linux.schema</file>
+        <file>data/color_schemes/Solarized.schema</file>
+        <file>data/color_schemes/SolarizedLight.schema</file>
+        <file>data/color_schemes/Tango.schema</file>
+        <file>data/color_schemes/Ubuntu.schema</file>
+        <file>data/build_info.conf</file>
+        <file>data/version.conf</file>
+    </qresource>
+</RCC>

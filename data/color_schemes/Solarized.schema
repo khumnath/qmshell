@@ -1,0 +1,32 @@
+# A modern, beautified version of the classic "Solarized" theme.
+# Created for a cleaner aesthetic and improved readability.
+
+title Solarized Modern
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0  200 210 215  0 0  # regular   foreground color (Soft Gray)
+color  1    0  43  54  1 0  # regular   background color (Solarized Dark Cyan)
+
+color  2    7  54  66  0 0  # regular   color 0 Black
+color  3  220  50  47  0 0  # regular   color 1 Red
+color  4  133 153   0  0 0  # regular   color 2 Green
+color  5  181 137   0  0 0  # regular   color 3 Yellow
+color  6   38 139 210  0 0  # regular   color 4 Blue
+color  7  211  54 130  0 0  # regular   color 5 Magenta
+color  8   42 161 152  0 0  # regular   color 6 Cyan
+color  9  238 232 213  0 0  # regular   color 7 White
+
+# intensive colors
+color 10  253 246 227  0 1  # intensive foreground color
+color 11    0  43  54  1 0  # intensive background color
+
+color 12   88 110 117  0 0  # intensive color 0
+color 13  203  75  22  0 0  # intensive color 1
+color 14  101 123 131  0 0  # intensive color 2
+color 15  131 148 150  0 0  # intensive color 3
+color 16  108 113 196  0 0  # intensive color 4
+color 17  147 161 161  0 0  # intensive color 5
+color 18   40 170 160  0 0  # intensive color 6
+color 19  253 246 227  0 0  # intensive color 7

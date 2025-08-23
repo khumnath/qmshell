@@ -1,0 +1,32 @@
+# A modern, beautified version of "Black on White"
+# Created for better readability and reduced eye strain.
+
+title Paperwhite
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0   50  50  50  0 0  # regular   foreground color (Dark Charcoal)
+color  1  245 245 245  1 0  # regular   background color (Off-White)
+
+color  2   50  50  50  0 0  # regular   color 0 Black
+color  3  190  50  50  0 0  # regular   color 1 Red
+color  4   50 160  50  0 0  # regular   color 2 Green
+color  5  190 120  40  0 0  # regular   color 3 Yellow
+color  6   50 120 200  0 0  # regular   color 4 Blue
+color  7  190  60 190  0 0  # regular   color 5 Magenta
+color  8   60 180 180  0 0  # regular   color 6 Cyan
+color  9  200 200 200  0 0  # regular   color 7 White
+
+# intensive colors
+color 10   20  20  20  0 1  # intensive foreground color
+color 11  245 245 245  1 0  # intensive background color
+
+color 12  110 110 110  0 0  # intensive color 0
+color 13  255  90  90  0 0  # intensive color 1
+color 14   90 255  90  0 0  # intensive color 2
+color 15  255 255  90  0 0  # intensive color 3
+color 16   90 150 255  0 0  # intensive color 4
+color 17  255  90 255  0 0  # intensive color 5
+color 18   90 255 255  0 0  # intensive color 6
+color 19  255 255 255  0 0  # intensive color 7

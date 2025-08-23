@@ -1,0 +1,32 @@
+# A modern, beautified version of "Black on Random Light"
+# Created for better readability and a softer aesthetic.
+
+title Modern Ivory
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0   80  75  70  0 0  # regular   foreground color (Warm Dark Gray)
+color  1  252 248 232  1 0  # regular   background color (Soft Ivory)
+
+color  2   80  75  70  0 0  # regular   color 0 Black
+color  3  195  60  60  0 0  # regular   color 1 Red
+color  4   60 160  60  0 0  # regular   color 2 Green
+color  5  190 145  50  0 0  # regular   color 3 Yellow
+color  6   60 120 200  0 0  # regular   color 4 Blue
+color  7  190  60 190  0 0  # regular   color 5 Magenta
+color  8   60 180 180  0 0  # regular   color 6 Cyan
+color  9  200 200 200  0 0  # regular   color 7 White
+
+# intensive colors
+color 10   50  45  40  0 1  # intensive foreground color
+color 11  252 248 232  1 0  # intensive background color
+
+color 12  120 120 120  0 0  # intensive color 0
+color 13  255 100 100  0 0  # intensive color 1
+color 14  100 255 100  0 0  # intensive color 2
+color 15  255 255 100  0 0  # intensive color 3
+color 16  100 150 255  0 0  # intensive color 4
+color 17  255 100 255  0 0  # intensive color 5
+color 18  100 255 255  0 0  # intensive color 6
+color 19  255 255 255  0 0  # intensive color 7

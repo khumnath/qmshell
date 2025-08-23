@@ -1,0 +1,42 @@
+# Maintainer: khumnath <nath.khum@gmail.com>
+pkgname=qmshell-git
+_pkgname=qmshell
+pkgdesc='Lightweight terminal emulator built using Qt6 QML + C++ (Git version)'
+pkgver=0.0.0.r170.g3f530cc
+pkgrel=1
+arch=('x86_64' 'aarch64')
+url="https://github.com/khumnath/qmshell"
+license=('GPL3')
+depends=('qt6-base' 'qt6-declarative')
+makedepends=('cmake' 'git' 'qt6-tools')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_pkgname"
+  basever=$(grep -E '^version=' data/version.conf | cut -d= -f2)
+  commitcount=$(git rev-list --count HEAD)
+  shorthash=$(git rev-parse --short HEAD)
+  echo "${basever}.r${commitcount}.g${shorthash}"
+}
+
+build() {
+  cd "$_pkgname"
+  cmake -B build -S . \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+}
+
+package() {
+  cd "$_pkgname"
+  DESTDIR="$pkgdir" cmake --install build
+
+  # License
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  # Desktop entry (already installed by CMake, but keep for safety)
+  install -Dm644 data/qmshell.desktop "$pkgdir/usr/share/applications/qmshell.desktop"
+}

@@ -1,0 +1,32 @@
+# A modern, beautified version of "Dark Pastels"
+# Created for a soft, low-contrast, and comfortable aesthetic.
+
+title Pastel Dark
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0  220 220 204  0 0  # regular   foreground color (Creamy Off-White)
+color  1   44  44  44  1 0  # regular   background color (Deep Charcoal)
+
+color  2   63  63  63  0 0  # regular   color 0 Black
+color  3  112  80  80  0 0  # regular   color 1 Red
+color  4   96 180 138  0 0  # regular   color 2 Green
+color  5  223 175 143  0 0  # regular   color 3 Yellow
+color  6  154 184 215  0 0  # regular   color 4 Blue
+color  7  220 140 195  0 0  # regular   color 5 Magenta
+color  8  140 208 211  0 0  # regular   color 6 Cyan
+color  9  220 220 204  0 0  # regular   color 7 White
+
+# intensive colors
+color 10  220 220 204  0 1  # intensive foreground color
+color 11   44  44  44  1 0  # intensive background color
+
+color 12  112 144 128  0 0  # intensive color 0
+color 13  220 163 163  0 0  # intensive color 1
+color 14  114 213 163  0 0  # intensive color 2
+color 15  240 223 175  0 0  # intensive color 3
+color 16  148 191 243  0 0  # intensive color 4
+color 17  236 147 211  0 0  # intensive color 5
+color 18  147 224 227  0 0  # intensive color 6
+color 19  255 255 255  0 0  # intensive color 7

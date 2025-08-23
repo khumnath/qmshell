@@ -1,0 +1,32 @@
+# A modern, beautified version of "Green on Black"
+# Created for a classic, stylish aesthetic with improved readability.
+
+title Matrix Green
+
+# foreground colors
+# slot    R   G   B   transparent bold
+
+color  0   40 230  80  0 0  # regular   foreground color (Vibrant Green)
+color  1   30  30  30  1 0  # regular   background color (Deep Charcoal)
+
+color  2   50  50  50  0 0  # regular   color 0 Black
+color  3  250  80  80  0 0  # regular   color 1 Red
+color  4   60 220  60  0 0  # regular   color 2 Green
+color  5  230 210  80  0 0  # regular   color 3 Yellow
+color  6  100 170 250  0 0  # regular   color 4 Blue
+color  7  230  80 230  0 0  # regular   color 5 Magenta
+color  8   80 220 220  0 0  # regular   color 6 Cyan
+color  9  210 210 210  0 0  # regular   color 7 White
+
+# intensive colors
+color 10   80 255 120  0 1  # intensive foreground color
+color 11   30  30  30  1 0  # intensive background color
+
+color 12  110 110 110  0 0  # intensive color 0
+color 13  255 110 110  0 0  # intensive color 1
+color 14  110 255 110  0 0  # intensive color 2
+color 15  255 255 110  0 0  # intensive color 3
+color 16  120 190 255  0 0  # intensive color 4
+color 17  255 110 255  0 0  # intensive color 5
+color 18  110 255 255  0 0  # intensive color 6
+color 19  255 255 255  0 0  # intensive color 7

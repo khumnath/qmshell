@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=qmshell
+Comment=QML-powered terminal interface
+Exec=qmshell
+Icon=qmshell
+Terminal=false
+Type=Application
+Categories=Utility;TerminalEmulator;
