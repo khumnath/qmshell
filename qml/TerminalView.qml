@@ -135,8 +135,8 @@ Item {
                 if (event.matches(StandardKey.Cut)) { container.sendKeyData("\x18"); event.accepted = true; return; }
                 if (event.matches(StandardKey.SelectAll)) { textArea.select(promptPosition, textArea.length); event.accepted = true; return; }
                 switch (event.key) {
-                    case Qt.Key_Up: container.sendKeyData("\x1b[A"); event.accepted = true; return;
-                    case Qt.Key_Down: container.sendKeyData("\x1b[B"); event.accepted = true; return;
+                    case Qt.Key_Up: terminalBackend.recallPreviousHistory(); event.accepted = true; return;
+                    case Qt.Key_Down: terminalBackend.recallNextHistory(); event.accepted = true; return;
                 }
                 if (event.key === Qt.Key_Tab) { container.sendKeyData("\x09"); event.accepted = true; return; }
                 const controlCharMap = { [Qt.Key_D]: "\x04", [Qt.Key_E]: "\x05", [Qt.Key_K]: "\x0B", [Qt.Key_L]: "\x0C", [Qt.Key_Q]: "\x11", [Qt.Key_R]: "\x12", [Qt.Key_S]: "\x13", [Qt.Key_U]: "\x15", [Qt.Key_W]: "\x17", [Qt.Key_Z]: "\x1A", };

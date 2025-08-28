@@ -21,6 +21,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QRegularExpression>
+#include <QMetaType>
 
 // Theme Management
 void TerminalBackend::discoverColorSchemes(const QString &directory)
@@ -145,6 +146,9 @@ QString TerminalBackend::getColorFromScheme(int ansiCode)
 TerminalBackend::TerminalBackend(QObject *parent, const QString &startDir)
     : QObject(parent), m_startDir(startDir), m_passwordMode(false)
 {
+    qRegisterMetaType<QString>("QString");
+
+    loadCommandHistory();
 }
 
 void TerminalBackend::startTerminal()
@@ -185,7 +189,7 @@ void TerminalBackend::startTerminal()
         setenv("TERM", "xterm-256color", 1);
         setenv("LS_COLORS", "di=34:ln=36:so=35:pi=33:ex=32", 1);
         std::string homeDir = getenv("HOME");
-        std::string historyPath = homeDir + "/.qmshellinal_history";
+        std::string historyPath = homeDir + "/.qmshell_history";
 
         setenv("HISTFILE", historyPath.c_str(), 1);
         setenv("HISTSIZE", "10000", 1);
@@ -253,16 +257,23 @@ QString TerminalBackend::parseAnsiToHtml(const QString &text)
             QString fg = m_foregroundColor.isEmpty() ? m_colorScheme.value("Foreground", QColor(Qt::white)).name() : m_foregroundColor;
             QString bg = m_backgroundColor;
 
-            bool hasStyle = !fg.isEmpty() || !bg.isEmpty() || m_isBold || m_isUnderlined || m_isItalic;
 
-            if (hasStyle) {
-                htmlOutput += QStringLiteral("<span style=\"");
-                if (!fg.isEmpty()) htmlOutput += QStringLiteral("color:") + fg + QStringLiteral(";");
-                if (!bg.isEmpty()) htmlOutput += QStringLiteral("background-color:") + bg + QStringLiteral(";");
-                if (m_isBold) htmlOutput += QStringLiteral("font-weight:bold;");
-                if (m_isItalic) htmlOutput += QStringLiteral("font-style:italic;");
-                if (m_isUnderlined) htmlOutput += QStringLiteral("text-decoration:underline;");
-                htmlOutput += QStringLiteral("\">") + replaced + QStringLiteral("</span>");
+            QString style;
+            if (!fg.isEmpty()) style += QStringLiteral("color:") + fg + QStringLiteral(";");
+            if (!bg.isEmpty()) style += QStringLiteral("background-color:") + bg + QStringLiteral(";");
+            if (m_isBold) style += QStringLiteral("font-weight:bold;");
+            if (m_isItalic) style += QStringLiteral("font-style:italic;");
+            if (m_isUnderlined) style += QStringLiteral("text-decoration:underline;");
+            if (m_isDim) style += QStringLiteral("opacity:0.6;");
+            if (m_isBlink) style += QStringLiteral("text-decoration:blink;");
+            if (m_isInverse) style += QStringLiteral("filter:invert(1);");
+            if (m_isHidden) style += QStringLiteral("visibility:hidden;");
+            if (m_isStrikethrough) style += QStringLiteral("text-decoration:line-through;");
+            if (m_isDoubleUnderline) style += QStringLiteral("text-decoration:underline double;");
+            if (m_isOverline) style += QStringLiteral("text-decoration:overline;");
+
+            if (!style.isEmpty()) {
+                htmlOutput += QStringLiteral("<span style=\"") + style + QStringLiteral("\">") + replaced + QStringLiteral("</span>");
             } else {
                 htmlOutput += replaced;
             }
@@ -298,13 +309,26 @@ QString TerminalBackend::parseAnsiToHtml(const QString &text)
                                 m_foregroundColor.clear();
                                 m_backgroundColor.clear();
                                 m_isBold = m_isItalic = m_isUnderlined = false;
+                                m_isDim = m_isBlink = m_isInverse = m_isHidden = m_isStrikethrough = m_isDoubleUnderline = m_isOverline = false;
                                 break;
                             case 1:  m_isBold = true; break;
+                            case 2:  m_isDim = true; break;
                             case 3:  m_isItalic = true; break;
                             case 4:  m_isUnderlined = true; break;
-                            case 22: m_isBold = false; break;
+                            case 5:  m_isBlink = true; break;
+                            case 7:  m_isInverse = true; break;
+                            case 8:  m_isHidden = true; break;
+                            case 9:  m_isStrikethrough = true; break;
+                            case 21: m_isDoubleUnderline = true; break;
+                            case 22: m_isBold = m_isDim = false; break;
                             case 23: m_isItalic = false; break;
-                            case 24: m_isUnderlined = false; break;
+                            case 24: m_isUnderlined = m_isDoubleUnderline = false; break;
+                            case 25: m_isBlink = false; break;
+                            case 27: m_isInverse = false; break;
+                            case 28: m_isHidden = false; break;
+                            case 29: m_isStrikethrough = false; break;
+                            case 53: m_isOverline = true; break;
+                            case 55: m_isOverline = false; break;
                             case 39: m_foregroundColor.clear(); break;
                             case 49: m_backgroundColor.clear(); break;
 
@@ -374,7 +398,71 @@ void TerminalBackend::sendCommand(const QString &command)
         QByteArray data = command.toUtf8() + '\n';
         ::write(m_masterFd, data.constData(), data.size());
     }
+
+    addCommandToHistory(command);
 }
+
+// Slot to emit recalled history command to QML
+void TerminalBackend::recallHistoryCommand(const QString &command)
+{
+    emit historyCommandRecalled(command);
+}
+
+// Recall previous command from history
+void TerminalBackend::recallPreviousHistory()
+{
+    if (m_commandHistory.isEmpty()) return;
+    if (m_historyIndex < 0) m_historyIndex = m_commandHistory.size();
+    if (m_historyIndex > 0) m_historyIndex--;
+    emit historyCommandRecalled(m_commandHistory.at(m_historyIndex));
+}
+
+// Recall next command from history
+void TerminalBackend::recallNextHistory()
+{
+    if (m_commandHistory.isEmpty()) return;
+    if (m_historyIndex < m_commandHistory.size() - 1) {
+        m_historyIndex++;
+        emit historyCommandRecalled(m_commandHistory.at(m_historyIndex));
+    } else {
+        m_historyIndex = m_commandHistory.size();
+        emit historyCommandRecalled("");
+    }
+}
+
+// Load command history from file
+void TerminalBackend::loadCommandHistory()
+{
+    m_commandHistory.clear();
+    m_historyIndex = -1;
+    QString historyFile = QDir::homePath() + "/.qmshellinal_history";
+    QFile file(historyFile);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine().trimmed();
+            if (!line.isEmpty()) m_commandHistory.append(line);
+        }
+        file.close();
+    }
+}
+
+// Add command to history and file
+void TerminalBackend::addCommandToHistory(const QString &command)
+{
+    if (command.trimmed().isEmpty()) return;
+    if (!m_commandHistory.isEmpty() && m_commandHistory.last() == command) return;
+    m_commandHistory.append(command);
+    m_historyIndex = m_commandHistory.size();
+    QString historyFile = QDir::homePath() + "/.qmshell_history";
+    QFile file(historyFile);
+    if (file.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&file);
+        out << command << "\n";
+        file.close();
+    }
+}
+
 void TerminalBackend::sendKeyData(const QByteArray &keyData)
 {
     if (m_masterFd >= 0) {

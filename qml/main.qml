@@ -59,6 +59,16 @@ ApplicationWindow {
             }
         }
 
+        // Update TextArea with recalled history command
+        function onHistoryCommandRecalled(command) {
+            let promptPos = terminalView.textArea.promptPosition || 0;
+            let currentText = terminalView.textArea.text;
+            let beforePrompt = currentText.slice(0, promptPos);
+            terminalView.textArea.remove(promptPos, currentText.length - promptPos);
+            terminalView.textArea.insert(promptPos, command);
+            terminalView.textArea.cursorPosition = promptPos + command.length;
+        }
+
         function onForceClear() {
             terminalView.textArea.clear();
             terminalBackend.sendCommand("");
