@@ -188,13 +188,7 @@ void TerminalBackend::startTerminal()
         setenv("LC_ALL", "en_US.UTF-8", 1);
         setenv("TERM", "xterm-256color", 1);
         setenv("LS_COLORS", "di=34:ln=36:so=35:pi=33:ex=32", 1);
-        std::string homeDir = getenv("HOME");
-        std::string historyPath = homeDir + "/.qmshell_history";
 
-        setenv("HISTFILE", historyPath.c_str(), 1);
-        setenv("HISTSIZE", "10000", 1);
-        setenv("HISTFILESIZE", "10000", 1);
-        setenv("PROMPT_COMMAND", "history -a; history -c; history -r", 1);
 
         if (!m_startDir.isEmpty()) {
             if (chdir(m_startDir.toLocal8Bit().constData()) != 0) {
@@ -435,7 +429,7 @@ void TerminalBackend::loadCommandHistory()
 {
     m_commandHistory.clear();
     m_historyIndex = -1;
-    QString historyFile = QDir::homePath() + "/.qmshellinal_history";
+    QString historyFile = QDir::homePath() + "/.qmshell_history";
     QFile file(historyFile);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
